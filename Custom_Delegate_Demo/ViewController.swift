@@ -8,18 +8,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,ProcessDelegate {
 
+    @IBOutlet weak var processLabel: UILabel!
+    var process:Process?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.processLabel.text = "Processing..."
+        process = Process()
+        process?.delegate = self
+        process?.startProcess()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func didFinishTask(msg: String) {
+        self.processLabel.text = msg
     }
-
 
 }
+
+//extension ViewController:ProcessDelegate {
+//    func didFinishTask(msg: String) {
+//        self.processLabel.text = msg
+//    }
+//
+//}
 
